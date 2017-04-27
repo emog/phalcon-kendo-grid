@@ -2,7 +2,7 @@
 
 namespace EmoG\KendoGrid\Adapters;
 
-use KendoGrid\ParamsParser;
+use EmoG\KendoGrid\ParamsParser;
 
 abstract class AdapterInterface
 {
