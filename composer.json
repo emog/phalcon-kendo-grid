@@ -24,4 +24,9 @@
     "php": ">=5.0",
     "ext-phalcon": "^3.0"
   }
+  "extra": {
+    "branch-alias": {
+      "dev_master": "1.0-dev"
+    }
+  }
 }
