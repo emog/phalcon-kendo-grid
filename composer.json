@@ -1,6 +1,6 @@
 {
   "name": "emog/phalcon-kendo-grid",
-  "description": "KendoGrid adapter for Phalcon Framework",
+  "description": "KendoGrid Adapter for Phalcon Framework",
   "version": "1.0.0",
   "keywords": [
     "Phalcon",
