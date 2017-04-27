@@ -1,0 +1,27 @@
+{
+  "name": "emog/phalcon-kendo-grid",
+  "description": "KendoGrid adapter for Phalcon Framework",
+  "version": "1.0.0",
+  "keywords": [
+    "Phalcon",
+    "KendoGrid",
+    "Plugin"
+  ],
+  "license": "BSD 3-Clause",
+  "autoload": {
+    "psr-4": {
+      "EmoG\\KendoGrid\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Emil Georgiev",
+      "email": "egeorgiev@egeorgiev.net"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=4.0",
+    "ext-phalcon": "^3.0"
+  }
+}
