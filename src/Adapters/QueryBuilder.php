@@ -1,7 +1,6 @@
 <?php
 namespace EmoG\KendoGrid\Adapters;
 
-use App\Library\Utils;
 use Phalcon\Paginator\Adapter\QueryBuilder as PQueryBuilder;
 
 class QueryBuilder extends AdapterInterface
@@ -24,7 +23,15 @@ class QueryBuilder extends AdapterInterface
         });
 
         $this->bind('order', function ($order) {
-            $this->builder->orderBy(implode(', ', $order));
+
+            $customColumnsKeys = array_keys($this->customColumns);
+            $filteredOrders = [];
+            for ($i = 0; $i < count($order); $i++) {
+                $column = explode(' ', trim($order[$i]));
+                $columnName = !in_array($column[0], $customColumnsKeys) ? $column[0] : $this->customColumns[$column[0]];
+                $filteredOrders[] = $columnName . ' ' . $column[1];
+            }
+            $this->builder->orderBy(implode(', ', $filteredOrders));
         });
 
         $builder = new PQueryBuilder([

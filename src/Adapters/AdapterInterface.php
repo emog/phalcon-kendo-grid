@@ -50,6 +50,11 @@ abstract class AdapterInterface
         return in_array($column, $this->columns);
     }
 
+    public function columnExistsInCustomColumns($column)
+    {
+        return in_array($column, array_keys($this->customColumns));
+    }
+
     public function getParser()
     {
         return $this->parser;
@@ -111,7 +116,7 @@ abstract class AdapterInterface
                 foreach ($order as $orderBy) {
                     if (!isset($orderBy['dir']) || !isset($orderBy['field'])) continue;
                     $orderDir = mb_strtoupper($orderBy['dir']);
-                    if (!$this->columnExists($orderBy['field'])) continue;
+                    if (!$this->columnExists($orderBy['field']) && !$this->columnExistsInCustomColumns($orderBy['field'])) continue;
                     $orderArray[] = "{$orderBy['field']} {$orderDir}";
                 }
                 if (empty($orderArray)) return;
