@@ -1,7 +1,5 @@
 
-![Build Status](https://img.shields.io/badge/branch-master-blue.svg) [![Build Status](https://travis-ci.org/m1ome/phalcon-datatables.svg?branch=master)](https://travis-ci.org/m1ome/phalcon-datatables) [![Coverage Status](https://coveralls.io/repos/m1ome/phalcon-datatables/badge.svg)](https://coveralls.io/r/m1ome/phalcon-datatables)
 
-[![Total Downloads](https://poser.pugx.org/m1ome/phalcon-datatables/downloads.svg)](https://packagist.org/packages/m1ome/phalcon-datatables)  [![License](https://poser.pugx.org/m1ome/phalcon-datatables/license.svg)](https://packagist.org/packages/m1ome/phalcon-datatables)
 [![Dependency Status](https://www.versioneye.com/user/projects/54de663d271c93aa12000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54de663d271c93aa12000002)
 
 
@@ -32,14 +30,13 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [Kendo DataSou
 * Run `composer update`
 
 # Example usage
-It uses Phalcon [QueryBuilder](http://docs.phalconphp.com/en/latest/api/Phalcon_Mvc_Model_Query_Builder.html) for pagination in DataTables.
+It uses Phalcon [QueryBuilder](http://docs.phalconphp.com/en/latest/api/Phalcon_Mvc_Model_Query_Builder.html) for pagination in KendoGrid.
 
 In example we have a stantart MVC application, with database enabled. Don't need to provide a normal bootstrap PHP file, for Phalcon documentation, visit official site.
 
 ### Controller (using QueryBuilder):
 ```php
 <?php
-use \DataTables\DataTable;
 
 class TestController extends \Phalcon\Mvc\Controller {
     public function indexAction() {
@@ -48,8 +45,8 @@ class TestController extends \Phalcon\Mvc\Controller {
                           ->columns('id, name, email, balance')
                           ->from('Example\Models\User');
 
-          $dataTables = new DataTable();
-          $dataTables->fromBuilder($builder)->sendResponse();
+          $kendoGrid = new \EmoG\KendoGrid\KendoGrid();
+          $kendoGrid->fromBuilder($builder)->sendResponse();
         }
     }
 }
@@ -58,7 +55,6 @@ class TestController extends \Phalcon\Mvc\Controller {
 ### Controller (using ResultSet):
 ```php
 <?php
-use \DataTables\DataTable;
 
 class TestController extends \Phalcon\Mvc\Controller {
     public function indexAction() {
@@ -66,8 +62,8 @@ class TestController extends \Phalcon\Mvc\Controller {
           $resultset  = $this->modelsManager->createQuery("SELECT * FROM \Example\Models\User")
                              ->execute();
 
-          $dataTables = new DataTable();
-          $dataTables->fromResultSet($resultset)->sendResponse();
+          $kendoGrid = new \EmoG\KendoGrid\KendoGrid();
+          $kendoGrid->fromResultSet($resultset)->sendResponse();
         }
     }
 }
@@ -76,7 +72,6 @@ class TestController extends \Phalcon\Mvc\Controller {
 ### Controller (using Array):
 ```php
 <?php
-use \DataTables\DataTable;
 
 class TestController extends \Phalcon\Mvc\Controller {
     public function indexAction() {
@@ -84,8 +79,8 @@ class TestController extends \Phalcon\Mvc\Controller {
           $array  = $this->modelsManager->createQuery("SELECT * FROM \Example\Models\User")
                              ->execute()->toArray();
 
-          $dataTables = new DataTable();
-          $dataTables->fromArray($array)->sendResponse();
+          $kendoGrid = new \EmoG\KendoGrid\KendoGrid();
+          $kendoGrid->fromArray($array)->sendResponse();
         }
     }
 }
@@ -109,8 +104,6 @@ class User extends \Phalcon\Mvc\Model {
 <html>
     <head>
         <title>Simple KendoGrid Application</title>
-        <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                  var grid = $("#grid").kendoGrid({                          
