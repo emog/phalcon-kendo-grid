@@ -19,7 +19,6 @@
       "email": "egeorgiev@egeorgiev.net"
     }
   ],
-  "minimum-stability": "dev",
   "require": {
     "php": ">=5.0",
     "ext-phalcon": "^3.0"
