@@ -1,4 +1,5 @@
 <?php
+
 namespace EmoG\KendoGrid;
 
 use Phalcon\Mvc\User\Component;
@@ -7,7 +8,7 @@ class ParamsParser extends Component
 {
 
     protected $params = [];
-    protected $page = 1;
+    protected $page   = 1;
 
     public function __construct($limit)
     {
@@ -19,9 +20,10 @@ class ParamsParser extends Component
             'order' => []
         ];
 
-        $request = $this->di->get('request');
+        $request       = $this->di->get('request');
         $requestParams = $request->isPost() ? $request->getPost() : $request->getQuery();
-        $this->params = (array)$requestParams + $params;
+        $this->params  = array_merge($params, $requestParams);
+
         $this->setPage();
     }
 
