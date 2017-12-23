@@ -15,9 +15,9 @@ class ParamsParser extends Component
         $params = [
             'skip' => 0,
             'pageSize' => $limit,
-            'filter' => [],
+            'filter' => ['filters' => []],
             'search' => [],
-            'order' => []
+            'sort' => []
         ];
 
         $request       = $this->di->get('request');
