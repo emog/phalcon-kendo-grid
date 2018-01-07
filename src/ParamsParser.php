@@ -24,6 +24,10 @@ class ParamsParser extends Component
         $requestParams = $request->isPost() ? $request->getPost() : $request->getQuery();
         $this->params  = array_merge($params, $requestParams);
 
+        if (!isset($this->params['filter']['filters'])) {
+            $this->params['filter']['filters'] = [];
+        }
+
         $this->setPage();
     }
 
