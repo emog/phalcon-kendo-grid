@@ -147,7 +147,7 @@ abstract class AdapterInterface
     /**
      * @param $case
      * @param $closure
-     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     public function bind($case, $closure)
     {
@@ -180,7 +180,7 @@ abstract class AdapterInterface
                 $closure($orderArray);
                 break;
             default:
-                throw new \Exception('Unknown bind type');
+                throw new \InvalidArgumentException('Unknown bind type');
         }
 
     }
