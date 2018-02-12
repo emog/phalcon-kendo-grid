@@ -113,10 +113,6 @@ abstract class AdapterInterface
 
         if (count($options['data'])) {
             foreach ($options['data'] as $item) {
-                if (isset($item['id'])) {
-                    $item['DT_RowId'] = $item['id'];
-                }
-
                 $response['data'][] = $item;
             }
         } else {
