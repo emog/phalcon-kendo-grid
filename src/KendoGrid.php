@@ -5,8 +5,9 @@ use EmoG\KendoGrid\Adapters\QueryBuilder;
 use EmoG\KendoGrid\Adapters\ResultSet;
 use EmoG\KendoGrid\Adapters\ArrayAdapter;
 use Phalcon\Http\Response;
+use Phalcon\Mvc\User\Plugin;
 
-class KendoGrid extends \Phalcon\Mvc\User\Plugin
+class KendoGrid extends Plugin
 {
 
     protected $options;

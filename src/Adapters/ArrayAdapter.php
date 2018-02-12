@@ -15,6 +15,9 @@ class ArrayAdapter extends AdapterInterface
         $this->array = $array;
     }
 
+    /**
+     * @return array|mixed
+     */
     public function getResponse()
     {
         $limit = $this->parser->getLimit();

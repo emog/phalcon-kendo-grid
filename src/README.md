@@ -106,7 +106,7 @@ class User extends \Phalcon\Mvc\Model {
         <title>Simple KendoGrid Application</title>
         <script type="text/javascript">
             $(document).ready(function() {
-                 var grid = $("#grid").kendoGrid({                          
+                         $("#grid").kendoGrid({                          
                             dataSource: {
                                 dataType: "json",
                                 transport: {
@@ -122,14 +122,14 @@ class User extends \Phalcon\Mvc\Model {
                             pageable: true,
                             columns: [{
                                 field: "name",
-                                title: "Name",                      
+                                title: "Name"                      
                             }, {
                                 field: "address",
-                                title: "Address",              
+                                title: "Address"           
                 
                             }, {
                                 field: "phone",
-                                title: "Phone",
+                                title: "Phone"
                             }]
                         });
             });
