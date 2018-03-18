@@ -247,8 +247,10 @@ abstract class AdapterInterface
                 return strpos($itemValue, $searchValue) === false;
                 break;
             case "startswith":
+                return ($searchValue != '' && strpos($itemValue, $searchValue) === 0);
                 break;
             case "endswith":
+                return ((string)$searchValue === substr($itemValue, -strlen($searchValue)));
                 break;
             case "eq":
                 return $itemValue == $searchValue;
