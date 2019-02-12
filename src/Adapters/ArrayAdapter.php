@@ -4,7 +4,6 @@ namespace EmoG\KendoGrid\Adapters;
 
 class ArrayAdapter extends AdapterInterface
 {
-
     protected $array = [];
     protected $column = [];
     protected $global = [];
@@ -24,7 +23,7 @@ class ArrayAdapter extends AdapterInterface
         $offset = $this->parser->getOffset();
 
         $this->bind('column_search', function ($column) {
-            $this->column[$column['field']][] = array('searchValue' => $column['value'], 'operator' => $column['operator']);
+            $this->column[$column['field']][] = ['searchValue' => $column['value'], 'operator' => $column['operator']];
         });
 
         $this->bind('order', function ($order) {
@@ -40,7 +39,9 @@ class ArrayAdapter extends AdapterInterface
                     foreach ($this->global as $column => $filters) {
                         foreach ($filters as $search) {
                             $check = ($this->checkCondition($item[$column], $search['searchValue'], $search['operator']) !== false);
-                            if ($check) break 2;
+                            if ($check) {
+                                break 2;
+                            }
                         }
                     }
                 } else {
@@ -51,7 +52,9 @@ class ArrayAdapter extends AdapterInterface
                     foreach ($this->column as $column => $filters) {
                         foreach ($filters as $search) {
                             $check = ($this->checkCondition($item[$column], $search['searchValue'], $search['operator']) !== false);
-                            if (!$check) break 2;
+                            if (!$check) {
+                                break 2;
+                            }
                         }
                     }
                 }
@@ -99,5 +102,4 @@ class ArrayAdapter extends AdapterInterface
             'data' => $items,
         ]);
     }
-
 }

@@ -3,7 +3,6 @@ namespace EmoG\KendoGrid\Adapters;
 
 class ResultSet extends AdapterInterface
 {
-
     protected $resultSet;
     protected $column = [];
     protected $global = [];
@@ -16,7 +15,7 @@ class ResultSet extends AdapterInterface
         $total = $this->resultSet->count();
 
         $this->bind('column_search', function ($column) {
-            $this->column[$column['field']][] = array('searchValue' => $column['value'], 'operator' => $column['operator']);
+            $this->column[$column['field']][] = ['searchValue' => $column['value'], 'operator' => $column['operator']];
         });
 
         $this->bind('order', function ($order) {
@@ -31,7 +30,9 @@ class ResultSet extends AdapterInterface
                     foreach ($this->global as $column => $filters) {
                         foreach ($filters as $search) {
                             $check = ($this->checkCondition($item[$column], $search['searchValue'], $search['operator']) !== false);
-                            if ($check) break 2;
+                            if ($check) {
+                                break 2;
+                            }
                         }
                     }
                 } else {
@@ -42,7 +43,9 @@ class ResultSet extends AdapterInterface
                     foreach ($this->column as $column => $filters) {
                         foreach ($filters as $search) {
                             $check = ($this->checkCondition($item[$column], $search['searchValue'], $search['operator']) !== false);
-                            if (!$check) break 2;
+                            if (!$check) {
+                                break 2;
+                            }
                         }
                     }
                 }
@@ -99,5 +102,4 @@ class ResultSet extends AdapterInterface
     {
         $this->resultSet = $resultSet;
     }
-
 }

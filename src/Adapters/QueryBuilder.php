@@ -14,7 +14,6 @@ class QueryBuilder extends AdapterInterface
 
     public function getResponse()
     {
-
         $this->bind('column_search', function ($column) {
             $column = $this->getFilterDbOperators($column);
             $key = "key_{$column['field']}_" . $this->getRandomString();
@@ -23,7 +22,6 @@ class QueryBuilder extends AdapterInterface
         });
 
         $this->bind('order', function ($order) {
-
             $customColumnsKeys = array_keys($this->customColumns);
             $filteredOrders = [];
             for ($i = 0; $i < count($order); $i++) {

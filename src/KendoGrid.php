@@ -9,7 +9,6 @@ use Phalcon\Mvc\User\Plugin;
 
 class KendoGrid extends Plugin
 {
-
     protected $options;
     protected $params;
     protected $response;
@@ -95,5 +94,4 @@ class KendoGrid extends Plugin
 
         return $this;
     }
-
 }

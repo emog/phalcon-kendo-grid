@@ -9,7 +9,6 @@ use EmoG\KendoGrid\ParamsParser;
  */
 abstract class AdapterInterface
 {
-
     protected $parser        = null;
     protected $columns       = [];
     protected $customColumns = [];
@@ -150,7 +149,9 @@ abstract class AdapterInterface
         switch ($case) {
             case "column_search":
                 $columnSearch = $this->parser->getColumnsSearch();
-                if (!$columnSearch) return;
+                if (!$columnSearch) {
+                    return;
+                }
                 foreach ($columnSearch as $key => $column) {
                     if (!$this->columnExists($column['field']) && !$this->columnExistsInCustomColumns($column['field'])) {
                         continue;
@@ -160,25 +161,30 @@ abstract class AdapterInterface
                 break;
             case "order":
                 $order = $this->parser->getOrder();
-                if (!$order) return;
+                if (!$order) {
+                    return;
+                }
 
                 $orderArray = [];
 
                 foreach ($order as $orderBy) {
-                    if (!isset($orderBy['dir']) || !isset($orderBy['field'])) continue;
+                    if (!isset($orderBy['dir']) || !isset($orderBy['field'])) {
+                        continue;
+                    }
                     $orderDir = mb_strtoupper($orderBy['dir']);
                     if (!$this->columnExists($orderBy['field']) && !$this->columnExistsInCustomColumns($orderBy['field'])) {
                         continue;
                     }
                     $orderArray[] = "{$orderBy['field']} {$orderDir}";
                 }
-                if (empty($orderArray)) return;
+                if (empty($orderArray)) {
+                    return;
+                }
                 $closure($orderArray);
                 break;
             default:
                 throw new \InvalidArgumentException('Unknown bind type');
         }
-
     }
 
     /**
@@ -274,5 +280,4 @@ abstract class AdapterInterface
         }
         return false;
     }
-
 }

@@ -6,7 +6,6 @@ use Phalcon\Mvc\User\Component;
 
 class ParamsParser extends Component
 {
-
     protected $params = [];
     protected $page   = 1;
 
