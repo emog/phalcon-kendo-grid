@@ -1,7 +1,11 @@
 {
   "name": "emog/phalcon-kendo-grid",
   "description": "KendoGrid Adapter for Phalcon Framework",
-  "keywords": ["Phalcon", "KendoGrid", "Plugin"],
+  "keywords": [
+    "Phalcon",
+    "KendoGrid",
+    "Plugin"
+  ],
   "type": "library",
   "authors": [
     {
@@ -13,7 +17,8 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.0",
-    "ext-phalcon": "^3.0"
+    "ext-phalcon": "^3.0",
+    "ext-mbstring": "*"
   },
   "autoload": {
     "psr-4": {

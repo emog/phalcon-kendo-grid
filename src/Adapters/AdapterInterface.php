@@ -3,21 +3,35 @@
 namespace EmoG\KendoGrid\Adapters;
 
 use EmoG\KendoGrid\ParamsParser;
+use InvalidArgumentException;
 
 /**
  * @property ParamsParser $parser
  */
 abstract class AdapterInterface
 {
-    protected $parser        = null;
-    protected $columns       = [];
+    /**
+     * @var ParamsParser
+     */
+    protected $parser = null;
+    /**
+     * @var array
+     */
+    protected $columns = [];
+    /**
+     * @var array
+     */
     protected $customColumns = [];
 
+    /**
+     * @var int
+     */
     protected $length = 30;
 
     /**
      * AdapterInterface constructor.
-     * @param $length
+     *
+     * @param int $length
      */
     public function __construct($length)
     {
@@ -71,6 +85,7 @@ abstract class AdapterInterface
 
     /**
      * @param $column
+     *
      * @return bool
      */
     public function columnExists($column)
@@ -80,6 +95,7 @@ abstract class AdapterInterface
 
     /**
      * @param $column
+     *
      * @return bool
      */
     public function columnExistsInCustomColumns($column)
@@ -97,17 +113,19 @@ abstract class AdapterInterface
 
     /**
      * @param $options
+     *
      * @return array
      */
     public function formResponse($options)
     {
         $defaults = [
             'total' => 0,
-            'data' => []
+            'data'  => []
         ];
         $options  += $defaults;
 
-        $response          = [];
+        $response = [];
+
         $response['total'] = $options['total'];
 
         if (count($options['data'])) {
@@ -123,15 +141,17 @@ abstract class AdapterInterface
 
     /**
      * @param $string
+     *
      * @return string
      */
-    public function sanitaze($string)
+    public function sanitize($string)
     {
         return mb_substr($string, 0, $this->length);
     }
 
     /**
      * @param int $length
+     *
      * @return bool|string
      */
     public function getRandomString($length = 7)
@@ -142,7 +162,8 @@ abstract class AdapterInterface
     /**
      * @param $case
      * @param $closure
-     * @throws \InvalidArgumentException
+     *
+     * @throws InvalidArgumentException
      */
     public function bind($case, $closure)
     {
@@ -183,15 +204,16 @@ abstract class AdapterInterface
                 $closure($orderArray);
                 break;
             default:
-                throw new \InvalidArgumentException('Unknown bind type');
+                throw new InvalidArgumentException('Unknown bind type');
         }
     }
 
     /**
      * @param $column
-     * @return mixed
+     *
+     * @return array
      */
-    public function getFilterDbOperators($column)
+    public function getFilterDbOperators(array $column)
     {
         $column['searchValue'] = $column['value'];
         switch ($column['operator']) {
@@ -236,7 +258,8 @@ abstract class AdapterInterface
     /**
      * @param $itemValue
      * @param $searchValue
-     * @param $operator
+     * @param string $operator
+     *
      * @return bool
      */
     public function checkCondition($itemValue, $searchValue, $operator)

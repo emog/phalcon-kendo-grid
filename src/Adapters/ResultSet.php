@@ -1,18 +1,38 @@
 <?php
+
 namespace EmoG\KendoGrid\Adapters;
 
+/**
+ * Class ResultSet
+ * @package EmoG\KendoGrid\Adapters
+ */
 class ResultSet extends AdapterInterface
 {
+    /**
+     * @var \Phalcon\Mvc\Model\Resultset
+     */
     protected $resultSet;
+    /**
+     * @var array
+     */
     protected $column = [];
+    /**
+     * @var array
+     */
     protected $global = [];
+    /**
+     * @var array
+     */
     protected $order = [];
 
+    /**
+     * @return array|mixed
+     */
     public function getResponse()
     {
-        $limit = $this->parser->getLimit();
+        $limit  = $this->parser->getLimit();
         $offset = $this->parser->getOffset();
-        $total = $this->resultSet->count();
+        $total  = $this->resultSet->count();
 
         $this->bind('column_search', function ($column) {
             $this->column[$column['field']][] = ['searchValue' => $column['value'], 'operator' => $column['operator']];
@@ -56,12 +76,12 @@ class ResultSet extends AdapterInterface
             });
 
             $filtered = count($filter);
-            $items = array_map(function ($item) {
+            $items    = array_map(function ($item) {
                 return $item->toArray();
             }, $filter);
         } else {
             $filtered = $total;
-            $items = $this->resultSet->filter(function ($item) {
+            $items    = $this->resultSet->filter(function ($item) {
                 return $item->toArray();
             });
         }
@@ -94,11 +114,14 @@ class ResultSet extends AdapterInterface
 
         return $this->formResponse([
             'total' => (int)$filtered,
-            'data' => $items,
+            'data'  => $items,
         ]);
     }
 
-    public function setResultSet($resultSet)
+    /**
+     * @param \Phalcon\Mvc\Model\Resultset $resultSet
+     */
+    public function setResultSet(\Phalcon\Mvc\Model\Resultset $resultSet)
     {
         $this->resultSet = $resultSet;
     }

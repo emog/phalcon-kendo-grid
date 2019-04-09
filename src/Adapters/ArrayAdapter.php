@@ -2,13 +2,32 @@
 
 namespace EmoG\KendoGrid\Adapters;
 
+/**
+ * Class ArrayAdapter
+ * @package EmoG\KendoGrid\Adapters
+ */
 class ArrayAdapter extends AdapterInterface
 {
-    protected $array = [];
+    /**
+     * @var array
+     */
+    protected $array  = [];
+    /**
+     * @var array
+     */
     protected $column = [];
+    /**
+     * @var array
+     */
     protected $global = [];
+    /**
+     * @var array
+     */
     protected $order = [];
 
+    /**
+     * @param array $array
+     */
     public function setArray(array $array)
     {
         $this->array = $array;
@@ -19,7 +38,7 @@ class ArrayAdapter extends AdapterInterface
      */
     public function getResponse()
     {
-        $limit = $this->parser->getLimit();
+        $limit  = $this->parser->getLimit();
         $offset = $this->parser->getOffset();
 
         $this->bind('column_search', function ($column) {
@@ -99,7 +118,7 @@ class ArrayAdapter extends AdapterInterface
 
         return $this->formResponse([
             'total' => (int)$filtered,
-            'data' => $items,
+            'data'  => $items,
         ]);
     }
 }

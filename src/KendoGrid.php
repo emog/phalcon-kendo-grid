@@ -1,40 +1,69 @@
 <?php
+
 namespace EmoG\KendoGrid;
 
 use EmoG\KendoGrid\Adapters\QueryBuilder;
 use EmoG\KendoGrid\Adapters\ResultSet;
 use EmoG\KendoGrid\Adapters\ArrayAdapter;
 use Phalcon\Http\Response;
+use Phalcon\Mvc\Model\Query\Builder;
 use Phalcon\Mvc\User\Plugin;
 
+/**
+ * Class KendoGrid
+ * @package EmoG\KendoGrid
+ */
 class KendoGrid extends Plugin
 {
+    /**
+     * @var array
+     */
     protected $options;
-    protected $params;
+
+    /**
+     * @var array
+     */
     protected $response;
+    /**
+     * @var ParamsParser
+     */
     public $parser;
 
+    /**
+     * KendoGrid constructor.
+     *
+     * @param array $options
+     */
     public function __construct($options = [])
     {
         $default = [
-            'limit' => 20,
+            'limit'  => 20,
             'length' => 50,
         ];
 
         $this->options = $options + $default;
-        $this->parser = new ParamsParser($this->options['limit']);
+        $this->parser  = new ParamsParser($this->options['limit']);
     }
 
+    /**
+     * @return array
+     */
     public function getParams()
     {
         return $this->parser->getParams();
     }
 
+    /**
+     * @return array
+     */
     public function getResponse()
     {
         return !empty($this->response) ? $this->response : [];
     }
 
+    /**
+     *
+     */
     public function sendResponse()
     {
         if ($this->di->has('view')) {
@@ -47,7 +76,14 @@ class KendoGrid extends Plugin
         $response->send();
     }
 
-    public function fromBuilder($builder, $columns = [], $customColumns = [])
+    /**
+     * @param $builder
+     * @param array $columns
+     * @param array $customColumns
+     *
+     * @return $this
+     */
+    public function fromBuilder(Builder $builder, $columns = [], $customColumns = [])
     {
         if (empty($columns)) {
             $columns = $builder->getColumns();
@@ -64,7 +100,13 @@ class KendoGrid extends Plugin
         return $this;
     }
 
-    public function fromResultSet($resultSet, $columns = [])
+    /**
+     * @param \Phalcon\Mvc\Model\Resultset $resultSet
+     * @param array $columns
+     *
+     * @return $this
+     */
+    public function fromResultSet(\Phalcon\Mvc\Model\Resultset $resultSet, $columns = [])
     {
         if (empty($columns) && $resultSet->count() > 0) {
             $columns = array_keys($resultSet->getFirst()->toArray());
@@ -80,7 +122,13 @@ class KendoGrid extends Plugin
         return $this;
     }
 
-    public function fromArray($array, $columns = [])
+    /**
+     * @param array $array
+     * @param array $columns
+     *
+     * @return $this
+     */
+    public function fromArray(array $array, $columns = [])
     {
         if (empty($columns) && count($array) > 0) {
             $columns = array_keys(current($array));
